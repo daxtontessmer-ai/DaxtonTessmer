@@ -39,6 +39,40 @@
     background:#faf9f5 !important;
   }
 </style>
+
+<style id="work-card-spacing-v2">
+  #workTopoPage .summit-card .elevation{ display:none !important; }
+  #workTopoPage{ --orbit-radius:clamp(270px, 32vh, 352px); }
+  #workTopoPage .topo-stage{ min-height:920px; }
+  #workTopoPage .summit-card,
+  #workTopoPage.is-animated .summit-card,
+  #workTopoPage.is-animated .summit-card:hover{
+    width:clamp(132px, 12vw, 160px) !important;
+    height:clamp(238px, 38vh, 286px) !important;
+    padding-top:22px !important;
+  }
+  #workTopoPage .summit-card h3{ margin-top:0 !important; }
+  @media (max-width:980px){
+    #workTopoPage{ --orbit-radius:min(31vw, 145px); }
+    #workTopoPage .topo-stage{ min-height:850px; }
+    #workTopoPage .summit-card,
+    #workTopoPage.is-animated .summit-card,
+    #workTopoPage.is-animated .summit-card:hover{
+      width:min(42vw, 158px) !important;
+      height:276px !important;
+    }
+  }
+  @media (max-width:620px){
+    #workTopoPage{ --orbit-radius:min(34vw, 110px); }
+    #workTopoPage .topo-stage{ min-height:780px; }
+    #workTopoPage .summit-card,
+    #workTopoPage.is-animated .summit-card,
+    #workTopoPage.is-animated .summit-card:hover{
+      width:min(50vw, 148px) !important;
+      height:260px !important;
+    }
+  }
+</style>
 </head>
 <body>
 <a class="site-linktree-entry" href="DaxtonWay4721_linktree.html" aria-label="Open Linktree-style quick links page">Links</a>
@@ -1383,308 +1417,7 @@
   </div>
 </div>
 
-<style>
-  .road-journey{
-    position:relative;
-    height:660svh;
-    background:#fff;
-  }
-  .road-journey-viewport{
-    position:sticky;
-    top:0;
-    height:100svh;
-    overflow:hidden;
-    background:#fff;
-  }
-  .road-journey canvas{
-    display:block;
-    width:100%;
-    height:100%;
-  }
-  .road-billboards{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-  }
-  .road-billboard{
-    position:absolute;
-    left:50%;
-    top:17%;
-    width:min(520px, calc(100% - 40px));
-    margin:0;
-    opacity:0;
-    transform:translate(-50%,-50%) scale(.08);
-    transform-origin:center;
-    will-change:transform, opacity;
-  }
-  .road-billboard-frame{
-    position:relative;
-    z-index:1;
-    margin:0;
-    border:5px solid #30362f;
-    border-radius:3px;
-    background:#fff;
-    box-shadow:0 14px 32px rgba(21,31,24,.16), 0 0 0 1px #fff inset;
-    overflow:hidden;
-  }
-  .road-billboard img{
-    display:block;
-    width:100%;
-    height:clamp(200px, 42svh, 400px);
-    object-fit:contain;
-    background:#eef0eb;
-  }
-  .road-billboard figcaption{
-    padding:18px 22px 20px;
-    border-top:1px solid #d6dbd2;
-    color:#20271f;
-    background:#fff;
-  }
-  .road-billboard-label{
-    display:block;
-    margin-bottom:6px;
-    font:400 10px/1.4 'JetBrains Mono', monospace;
-    color:#4b6750;
-    letter-spacing:0;
-    text-transform:uppercase;
-  }
-  .road-billboard h2{
-    margin:0 0 8px;
-    font:500 25px/1.16 'Fraunces', serif;
-    letter-spacing:0;
-  }
-  .road-billboard p{
-    margin:0;
-    font:400 14px/1.5 'Inter', sans-serif;
-    letter-spacing:0;
-  }
-  .road-billboard-support{
-    position:absolute;
-    top:100%;
-    left:0;
-    right:0;
-    height:12svh;
-    max-height:110px;
-    display:flex;
-    justify-content:space-between;
-    padding:0 23%;
-  }
-  .road-billboard-support span{
-    width:9px;
-    height:100%;
-    background:linear-gradient(90deg,#adb5a9,#e2e6df 45%,#858f81);
-  }
-  .road-billboard-support::after{
-    content:'';
-    position:absolute;
-    bottom:-5px;
-    left:8%;
-    right:8%;
-    height:10px;
-    border-radius:50%;
-    background:rgba(25,35,24,.12);
-    filter:blur(4px);
-  }
-  @media (max-width:600px){
-    .road-billboard figcaption{ padding:14px 16px 16px; }
-    .road-billboard h2{ font-size:22px; }
-    .road-billboard p{ font-size:13px; }
-  }
-  @media (max-height:540px){
-    .road-billboard img{ height:34svh; min-height:0; }
-    .road-billboard figcaption{ padding:10px 16px; }
-    .road-billboard h2{ font-size:20px; margin-bottom:5px; }
-    .road-billboard p{ font-size:12px; line-height:1.35; }
-    .road-billboard-support{ height:8svh; }
-  }
-  @media (prefers-reduced-motion:reduce){
-    .road-journey{ height:auto; }
-    .road-journey-viewport{ position:relative; height:auto; min-height:100svh; }
-    .road-journey canvas{ position:absolute; inset:0; opacity:.18; }
-    .road-billboards{ position:relative; display:grid; gap:90px; padding:64px 0 120px; }
-    .road-billboard{ position:relative; left:auto !important; top:auto !important; margin:0 auto; opacity:1 !important; transform:none !important; will-change:auto; }
-  }
-</style>
-<section class="road-journey" id="roadJourney" aria-label="Photographs and stories along the road">
-  <div class="road-journey-viewport">
-    <canvas id="roadJourneyCanvas" aria-hidden="true"></canvas>
-    <div class="road-billboards">
-      <article class="road-billboard" data-road-source=".cover-original">
-        <figure class="road-billboard-frame">
-          <img alt="Daxton sitting on an ATV in Alaska" decoding="async">
-          <figcaption>
-            <span class="road-billboard-label">01 / Alaska</span>
-            <h2>Johnson Fisheries</h2>
-            <p>Forty-three days of commercial fishing, long shifts, new friendships, and lessons in grit, people, and adventure.</p>
-          </figcaption>
-        </figure>
-        <div class="road-billboard-support" aria-hidden="true"><span></span><span></span></div>
-      </article>
-      <article class="road-billboard" data-road-source=".story-slot:nth-child(2) .story-photo">
-        <figure class="road-billboard-frame">
-          <img alt="Daxton with the Peanut Pupper team" decoding="async">
-          <figcaption>
-            <span class="road-billboard-label">02 / Peanut Pupper</span>
-            <h2>Selling with honesty</h2>
-            <p>My VIP sales internship with Peanut Pupper: learning about sales, brand growth, and connecting with people without pressure.</p>
-          </figcaption>
-        </figure>
-        <div class="road-billboard-support" aria-hidden="true"><span></span><span></span></div>
-      </article>
-    </div>
-  </div>
-</section>
 
-<script>
-(function(){
-  var section = document.getElementById('roadJourney');
-  var canvas = document.getElementById('roadJourneyCanvas');
-  var workCanvas = document.getElementById('workRoadCanvas');
-  if(!section || !canvas) return;
-  var context = canvas.getContext('2d');
-  var motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var reducedMotion = motionPreference.matches;
-  var frame = 0;
-  var billboards = Array.prototype.slice.call(section.querySelectorAll('.road-billboard'));
-  billboards.forEach(function(billboard){
-    var source = document.querySelector(billboard.getAttribute('data-road-source'));
-    if(source) billboard.querySelector('img').src = source.currentSrc || source.src;
-  });
-
-  function clamp(value){ return Math.max(0, Math.min(1, value)); }
-  function smoothstep(start, end, value){
-    var t = clamp((value - start) / (end - start));
-    return t * t * (3 - 2 * t);
-  }
-  function rampIntegral(value, width){
-    if(value <= 0) return 0;
-    if(value >= width) return value - width / 2;
-    var t = value / width;
-    return width * (t * t * t - .5 * t * t * t * t);
-  }
-
-  function positionBillboards(progress, width, height){
-    var distance = progress;
-    billboards.forEach(function(billboard, index){
-      var start = .04 + index * .92 / billboards.length;
-      var duration = .88 / billboards.length;
-      var local = (progress - start) / duration;
-      var approach = smoothstep(0, .40, local);
-      var departure = smoothstep(.72, 1, local);
-      var side = index % 2 ? 1 : -1;
-      var roadside = width * (width < 600 ? .18 : .25);
-      var x = width * .5 + side * (Math.sin(approach * Math.PI) * roadside + departure * width * .85);
-      var y = height * (.17 + approach * .28 + departure * .28);
-      var scale = (.08 + approach * .92) * (1 + departure * .45);
-      var opacity = smoothstep(0, .10, local) * (1 - smoothstep(.76, 1, local));
-      billboard.style.left = x.toFixed(2) + 'px';
-      billboard.style.top = y.toFixed(2) + 'px';
-      billboard.style.transform = 'translate(-50%,-50%) scale(' + scale.toFixed(4) + ')';
-      billboard.style.opacity = opacity.toFixed(3);
-      billboard.style.zIndex = String(2 + Math.round(approach * 10));
-      // Ease the road to a crawl while a photograph is close enough to read.
-      var pauseStart = start + duration * .36;
-      var pauseEnd = start + duration * .70;
-      distance -= .88 * (rampIntegral(progress - pauseStart, .022) - rampIntegral(progress - pauseEnd, .022));
-    });
-    return distance;
-  }
-
-  function polygon(points, color){
-    context.fillStyle = color;
-    context.beginPath();
-    points.forEach(function(point, index){
-      if(index) context.lineTo(point[0], point[1]);
-      else context.moveTo(point[0], point[1]);
-    });
-    context.closePath();
-    context.fill();
-  }
-
-  function draw(){
-    frame = 0;
-    var width = canvas.clientWidth;
-    var height = canvas.clientHeight;
-    if(!width || !height) return;
-    var ratio = Math.min(window.devicePixelRatio || 1, 2);
-    var pixelWidth = Math.round(width * ratio);
-    var pixelHeight = Math.round(height * ratio);
-    if(canvas.width !== pixelWidth || canvas.height !== pixelHeight){
-      canvas.width = pixelWidth;
-      canvas.height = pixelHeight;
-    }
-    context.setTransform(ratio, 0, 0, ratio, 0, 0);
-    context.fillStyle = '#fff';
-    context.fillRect(0, 0, width, height);
-
-    var bounds = section.getBoundingClientRect();
-    var travel = Math.max(1, section.offsetHeight - height);
-    var progress = clamp(-bounds.top / travel);
-    var distance = reducedMotion ? 0 : positionBillboards(progress, width, height);
-    var horizon = height * .15;
-    var center = width * .5;
-    var nearHalf = Math.min(width * (width < 700 ? .47 : .37), 560);
-    var farHalf = Math.max(3, nearHalf * .012);
-    var phase = reducedMotion ? 0 : distance * 22;
-
-    function yAt(depth){ return horizon + Math.pow(depth, 1.48) * (height - horizon); }
-    function halfAt(depth){ return farHalf + Math.pow(depth, 1.12) * (nearHalf - farHalf); }
-
-    polygon([[center-farHalf,horizon],[center+farHalf,horizon],[center+nearHalf,height],[center-nearHalf,height]], '#292b2b');
-    for(var band=0; band<30; band++){
-      var bandDepth = ((band / 30 + phase * .12) % 1 + 1) % 1;
-      var nextDepth = Math.min(1, bandDepth + .008);
-      var inset = halfAt(bandDepth) * .02;
-      polygon([
-        [center-halfAt(bandDepth)+inset,yAt(bandDepth)],
-        [center+halfAt(bandDepth)-inset,yAt(bandDepth)],
-        [center+halfAt(nextDepth)-inset,yAt(nextDepth)],
-        [center-halfAt(nextDepth)+inset,yAt(nextDepth)]
-      ], band % 2 ? 'rgba(255,255,255,.018)' : 'rgba(0,0,0,.025)');
-    }
-
-    [-1,1].forEach(function(side){
-      var outerNear = halfAt(1) * .91;
-      var outerFar = halfAt(0) * .91;
-      var lineNear = Math.max(2, nearHalf * .012);
-      polygon([
-        [center+side*outerFar,horizon],
-        [center+side*(outerFar+1),horizon],
-        [center+side*(outerNear+lineNear),height],
-        [center+side*outerNear,height]
-      ], '#e8e8e4');
-    });
-
-    for(var marker=0; marker<18; marker++){
-      var depth = ((marker / 18 + phase * .15) % 1 + 1) % 1;
-      if(depth < .035) continue;
-      var endDepth = Math.min(1, depth + .028);
-      var startY = yAt(depth);
-      var endY = yAt(endDepth);
-      var startHalf = Math.max(1, halfAt(depth) * .018);
-      var endHalf = Math.max(1, halfAt(endDepth) * .018);
-      polygon([
-        [center-startHalf,startY],[center+startHalf,startY],
-        [center+endHalf,endY],[center-endHalf,endY]
-      ], '#f5f3ed');
-    }
-
-  }
-
-  function requestDraw(){
-    if(!frame) frame = requestAnimationFrame(draw);
-  }
-  window.addEventListener('scroll', requestDraw, {passive:true});
-  window.addEventListener('resize', requestDraw);
-  function updateMotionPreference(event){
-    reducedMotion = event.matches;
-    requestDraw();
-  }
-  if(motionPreference.addEventListener) motionPreference.addEventListener('change', updateMotionPreference);
-  else motionPreference.addListener(updateMotionPreference);
-  requestDraw();
-})();
-</script>
 
 <script data-vendor="three-r128">
 /**
